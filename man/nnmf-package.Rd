@@ -13,8 +13,8 @@ Nonnegative matrix factorization (NMF) is implemented.
 \tabular{ll}{
 Package: \tab nnmf\cr
 Type: \tab Package\cr
-Version: \tab 1.0 \cr
-Date: \tab 2026-01-05\cr
+Version: \tab 1.1 \cr
+Date: \tab 2026-02-03\cr
 License: \tab GPL-2\cr
 }
 }

@@ -5,7 +5,7 @@ NMF minimizing the Frobenius norm
 }
 
 \description{
-NMF minimizing the Frobenius norm using quadratic programming.
+NMF minimizing the Frobenius norm using sequential quadratic programming.
 }
 
 \usage{
