@@ -29,41 +29,18 @@ of Witten and Tibshirani (2010) is used to initiate the H matrix.
 }
 
 \details{
-Nonnegative matrix factorization using quadratic programming is performed. 
+Nonnegative matrix factorization using quadratic programming is performed.
 The objective function to be minimized is the square of the Frobenius norm.
 }
 
 \value{
-\item{W}{
-The \eqn{W} matrix, an \eqn{n \times k} matrix with the mapped data.
-}
-\item{H}{
 The \eqn{H} matrix, an \eqn{k \times D} matrix.
-}
-\item{Z}{
-The reconstructed data, \eqn{Z = WH}.
-}
-\item{obj}{
-The reconstruction error, \eqn{ ||x - Z||_F^2}.
-}
-\item{error}{
-If the argument history was set to TRUE the reconstruction error at each iteration will be performed, otherwise this is NULL.
-}
-\item{iters}{
-The number of iterations performed.
-}
-\item{runtime}{
-The runtime required by the algorithm.
-}
 }
 
 \references{
-Alenazi A. and Tsagris M. (2026). Simplicial nonnegative matrix factorization. In preparation.
+Wang Y. X. and Zhang Y. J. (2012). Nonnegative matrix factorization: A comprehensive review. IEEE Transactions on Knowledge and Data Engineering, 25(6): 1336-1353.
 
-Witten D. M. and Tibshirani R. (2010). A framework for feature selection in clustering. 
-Journal of the American Statistical Association, 105(490): 713--726.
-
-Cutler A. and Breiman L. (1994). Archetypal analysis. Technometrics, 36(4): 338--347.
+Kim H. and Park H. (2008). Nonnegative matrix factorization based on alternating nonnegativity constrained least squares and active set method. SIAM Journal on Matrix Analysis and Applications, 30(2): 713-730.
 }
 
 \author{

@@ -9,7 +9,7 @@ NMF minimizing the Frobenius norm using sequential quadratic programming.
 }
 
 \usage{
-nmf.sqp(x, k, W = NULL, H = NULL, maxiter = 1000, tol = 1e-4, ridge = 1e-8,
+nmf.sqp(x, k, H = NULL, maxiter = 1000, tol = 1e-4, ridge = 1e-8,
 history = FALSE, ncores = 1)
 }
 
@@ -19,9 +19,6 @@ An \eqn{n \times D} dgC class sparse matrix with data.
 }
 \item{k}{
 The number of lower dimensions. It must be less than the dimensionality of the data, at most \eqn{D-1}.
-}
-\item{W}{
-If you have an initial estimate for W supply it here. Otherwise leave it NULL.
 }
 \item{H}{
 If you have an initial estimate for H supply it here, otherwise leave it NULL.
@@ -71,9 +68,9 @@ The runtime required by the algorithm.
 }
 
 \references{
-Alenazi A. and Tsagris M. (2026). Simplicial nonnegative matrix factorization. In preparation.
+Wang Y. X. and Zhang Y. J. (2012). Nonnegative matrix factorization: A comprehensive review. IEEE Transactions on Knowledge and Data Engineering, 25(6): 1336-1353.
 
-Cutler A. and Breiman L. (1994). Archetypal analysis. Technometrics, 36(4): 338--347.
+Kim H. and Park H. (2008). Nonnegative matrix factorization based on alternating nonnegativity constrained least squares and active set method. SIAM Journal on Matrix Analysis and Applications, 30(2): 713-730.
 }
 
 \author{

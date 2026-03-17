@@ -1,33 +1,23 @@
-\name{nmf.manh}
-\alias{nmf.manh}
+\name{nmf.hals}
+\alias{nmf.hals}
 \title{
-Simplicial NMF minimizing the Manhattan distance
+NMF minimizing using the hierarchical ALS algorithm
 }
 
 \description{
-NMF minimizing the Manhattan distance.
+NMF minimizing using the hierarchical ALS algorithm.
 }
 
 \usage{
-nmf.manh(x, k, W = NULL, H = NULL, k_meds = TRUE,
-maxiter = 1000, tol = 1e-6, ncores = 1)
+nmf.hals(x, k, maxiter = 2000, tol = 1e-6, history = FALSE)
 }
 
 \arguments{
 \item{x}{
-An \eqn{n \times D} matrix with data. Zero values are allowed.
+An \eqn{n \times D} numerical matrix with data.
 }
 \item{k}{
 The number of lower dimensions. It must be less than the dimensionality of the data, at most \eqn{D-1}.
-}
-\item{W}{
-If you have an initial estimate for W supply it here. Otherwise leave it NULL.
-}
-\item{H}{
-If you have an initial estimate for H supply it here, otherwise leave it NULL.
-}
-\item{k_meds}{
-If this is TRUE, then the K-medoids algorithm is used to initiate the W and H matrices.
 }
 \item{maxiter}{
 The maximum number of iterations allowed.
@@ -35,13 +25,14 @@ The maximum number of iterations allowed.
 \item{tol}{
 The tolerance value to terminate the quadratic programming algorithm.
 }
-\item{ncores}{
-Do you want the update of W to be performed in parallel? If yes, specify the number of cores to use.
+\item{history}{
+If this is TRUE, the reconstruction error at each iteration is returned.
 }
 }
 
 \details{
-Nonnegative matrix factorization minimizing the Manhattan distance.
+Nonnegative matrix factorization using the hierarchical alternating least squares algorithm
+is performed. The objective function to be minimized is the square of the Frobenius norm.
 }
 
 \value{
@@ -69,9 +60,9 @@ The runtime required by the algorithm.
 }
 
 \references{
-Wang Y. X. and Zhang Y. J. (2012). Nonnegative matrix factorization: A comprehensive review. IEEE Transactions on Knowledge and Data Engineering, 25(6): 1336-1353.
-
-Kim H. and Park H. (2008). Nonnegative matrix factorization based on alternating nonnegativity constrained least squares and active set method. SIAM Journal on Matrix Analysis and Applications, 30(2): 713-730.
+Erichson N. B., Mendible A., Wihlborn S. and Kutz J. N. (2018). Randomized nonnegative matrix factorization.
+Pattern Recognition Letters, 104: 1-7.
+https://arxiv.org/pdf/1711.02037
 }
 
 \author{
@@ -85,13 +76,13 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{nmf.qp}
+\code{ \link{nmf.qp}, \link{nmf.sqp}
 }
 }
 
 \examples{
 x <- as.matrix(iris[, 1:4])
-mod <- nmf.qp(x, 3)
+mod <- nmf.qp(x, 2)
 group <- as.numeric(iris[, 5])
 plot(mod$W, col = group)
 }

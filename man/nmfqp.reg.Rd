@@ -64,9 +64,9 @@ The runtime required by the algorithm.
 }
 
 \references{
-Alenazi A. and Tsagris M. (2026). Simplicial nonnegative matrix factorization. In preparation.
+Wang Y. X. and Zhang Y. J. (2012). Nonnegative matrix factorization: A comprehensive review. IEEE Transactions on Knowledge and Data Engineering, 25(6): 1336-1353.
 
-Cutler A. and Breiman L. (1994). Archetypal analysis. Technometrics, 36(4): 338--347.
+Kim H. and Park H. (2008). Nonnegative matrix factorization based on alternating nonnegativity constrained least squares and active set method. SIAM Journal on Matrix Analysis and Applications, 30(2): 713-730.
 }
 
 \author{
