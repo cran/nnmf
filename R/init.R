@@ -1,8 +1,8 @@
-init <- function(x, k, bs = 1, veo = FALSE) {
+init <- function(x, k, bs = 1) {
 
-  D <- dim(x)[2]
+  n <- dim(x)[1]  ;  D <- dim(x)[2]
   if ( bs == 1 ) {
-    if ( veo ) {
+    if ( D >= n ) {
       H <- matrix(nrow = k, ncol = D)
       cs <- as.numeric( sparcl::KMeansSparseCluster(x, k, wbounds = 2)[[1]]$Cs )
       for ( i in 1:k )  H[i, ] <- Rfast::colmeans(x[cs == i, , drop = FALSE])

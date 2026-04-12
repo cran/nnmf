@@ -9,7 +9,7 @@ Initialization strategies for the NMF based on the k-means algorithm.
 }
 
 \usage{
-init(x, k, bs = 1, veo = FALSE)
+init(x, k, bs = 1)
 }
 
 \arguments{
@@ -22,15 +22,10 @@ The number of lower dimensions. It must be less than the dimensionality of the d
 \item{bs}{
 The batch size in case the user wants to use the mini-batch k-means algorithm. If bs=1, the classical k-means is used.
 }
-\item{veo}{
-If the (number of) variables exceed the (number of) observations set this equal to true. In this case, the sparse k-means algorithm
-of Witten and Tibshirani (2010) is used to initiate the H matrix.
-}
 }
 
 \details{
-Nonnegative matrix factorization using quadratic programming is performed.
-The objective function to be minimized is the square of the Frobenius norm.
+The function initializes the H matrix for the NMF using the k-means algorithm.
 }
 
 \value{

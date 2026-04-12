@@ -9,18 +9,18 @@ NMF minimizing the Frobenius norm using quadratic programming.
 }
 
 \usage{
-nmf.qp(x, k, H = NULL, k_means = TRUE, bs = 1, veo = FALSE, lr_h = 0.1,
-maxiter = 1000, tol = 1e-6, ridge = 1e-8, history = FALSE, ncores = 1)
+nmf.qp(X, k, H_init = NULL, k_means = TRUE, bs = 1, lr_h = 0.1,tol = 1e-6,
+       maxiter = 1000, ridge = 1e-8, ncores = 1)
 }
 
 \arguments{
-\item{x}{
+\item{X}{
 An \eqn{n \times D} numerical matrix with data.
 }
 \item{k}{
 The number of lower dimensions. It must be less than the dimensionality of the data, at most \eqn{D-1}.
 }
-\item{H}{
+\item{H_init}{
 If you have an initial estimate for H supply it here, otherwise leave it NULL.
 }
 \item{k_means}{
@@ -29,23 +29,17 @@ If this is TRUE, then the K-means algorithm is used to initiate the W and H matr
 \item{bs}{
 If you use the K-means algorithm for initialization, you may want to use the mini batch K-means if you have millions of observations. In this case, you need to define the number of batches.
 }
-\item{veo}{
-If the number of variables excceeds the number of observations set this is equal to TRUE.
-}
 \item{lr_h}{
 If veo is TRUE, then the exponentiated gradient descent method is used to update the H matrix. In this case you need to supply the value of the learning rate, which is 0.1 by default.
-}
-\item{maxiter}{
-The maximum number of iterations allowed.
 }
 \item{tol}{
 The tolerance value to terminate the quadratic programming algorithm.
 }
+\item{maxiter}{
+The maximum number of iterations allowed.
+}
 \item{ridge}{
 A small quantity added in the diagonal of the \eqn{D} matrix.
-}
-\item{history}{
-If this is TRUE, the reconstruction error at each iteration is returned.
 }
 \item{ncores}{
 Do you want the update of W to be performed in parallel? If yes, specify the number of cores to use.
@@ -55,6 +49,8 @@ Do you want the update of W to be performed in parallel? If yes, specify the num
 \details{
 Nonnegative matrix factorization using quadratic programming is performed.
 The objective function to be minimized is the square of the Frobenius norm.
+If the variables are more than the sample size a hybrid algorithm based on quadratic
+programming (for W) and exponentiated gradient descent (for H) is applied.
 }
 
 \value{
@@ -69,9 +65,6 @@ The reconstructed data, \eqn{Z = WH}.
 }
 \item{obj}{
 The reconstruction error, \eqn{ ||x - Z||_F^2}.
-}
-\item{error}{
-If the argument history was set to TRUE the reconstruction error at each iteration will be performed, otherwise this is NULL.
 }
 \item{iters}{
 The number of iterations performed.
@@ -88,9 +81,10 @@ Kim H. and Park H. (2008). Nonnegative matrix factorization based on alternating
 }
 
 \author{
-Michail Tsagris.
+Michail Tsagris, Nikolaos Kontemeniotis and Christos Adam.
 
-R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}, Nikolaos Kontemeniotis \email{kontemeniotisn@gmail.com}
+and Christos Adam \email{pada4m4@gmail.com}.
 }
 
 %\note{
@@ -103,8 +97,8 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 }
 
 \examples{
-x <- as.matrix(iris[, 1:4])
-mod <- nmf.qp(x, 2)
+X <- as.matrix(iris[, 1:4])
+mod <- nmf.qp(X, 2)
 group <- as.numeric(iris[, 5])
 plot(mod$W, col = group)
 }

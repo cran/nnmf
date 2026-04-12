@@ -11,27 +11,60 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// nmf_als
-Rcpp::List nmf_als(const Eigen::MatrixXd& X, const int low_dim, const Rcpp::Nullable<Eigen::MatrixXd> W_init, const Rcpp::Nullable<Eigen::MatrixXd> H_init, const double tol, const int max_iter, const bool parallel, const int ncores);
-RcppExport SEXP _nnmf_nmf_als(SEXP XSEXP, SEXP low_dimSEXP, SEXP W_initSEXP, SEXP H_initSEXP, SEXP tolSEXP, SEXP max_iterSEXP, SEXP parallelSEXP, SEXP ncoresSEXP) {
+// nmf_pred_cpp
+Rcpp::List nmf_pred_cpp(const Eigen::MatrixXd& X, const Eigen::MatrixXd& H, const double ridge, const int ncores);
+RcppExport SEXP _nnmf_nmf_pred_cpp(SEXP XSEXP, SEXP HSEXP, SEXP ridgeSEXP, SEXP ncoresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type H(HSEXP);
+    Rcpp::traits::input_parameter< const double >::type ridge(ridgeSEXP);
+    Rcpp::traits::input_parameter< const int >::type ncores(ncoresSEXP);
+    rcpp_result_gen = Rcpp::wrap(nmf_pred_cpp(X, H, ridge, ncores));
+    return rcpp_result_gen;
+END_RCPP
+}
+// nmf_als_cpp
+Rcpp::List nmf_als_cpp(const Eigen::MatrixXd& X, const int low_dim, const Rcpp::Nullable<Eigen::MatrixXd> H_init, const double lr_h, const double tol, const int max_iter, const double ridge, const int ncores);
+RcppExport SEXP _nnmf_nmf_als_cpp(SEXP XSEXP, SEXP low_dimSEXP, SEXP H_initSEXP, SEXP lr_hSEXP, SEXP tolSEXP, SEXP max_iterSEXP, SEXP ridgeSEXP, SEXP ncoresSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type X(XSEXP);
     Rcpp::traits::input_parameter< const int >::type low_dim(low_dimSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<Eigen::MatrixXd> >::type W_init(W_initSEXP);
     Rcpp::traits::input_parameter< const Rcpp::Nullable<Eigen::MatrixXd> >::type H_init(H_initSEXP);
+    Rcpp::traits::input_parameter< const double >::type lr_h(lr_hSEXP);
     Rcpp::traits::input_parameter< const double >::type tol(tolSEXP);
     Rcpp::traits::input_parameter< const int >::type max_iter(max_iterSEXP);
-    Rcpp::traits::input_parameter< const bool >::type parallel(parallelSEXP);
+    Rcpp::traits::input_parameter< const double >::type ridge(ridgeSEXP);
     Rcpp::traits::input_parameter< const int >::type ncores(ncoresSEXP);
-    rcpp_result_gen = Rcpp::wrap(nmf_als(X, low_dim, W_init, H_init, tol, max_iter, parallel, ncores));
+    rcpp_result_gen = Rcpp::wrap(nmf_als_cpp(X, low_dim, H_init, lr_h, tol, max_iter, ridge, ncores));
+    return rcpp_result_gen;
+END_RCPP
+}
+// nmf_reg_cpp
+Rcpp::List nmf_reg_cpp(const Eigen::MatrixXd& X, const Eigen::MatrixXd& Z, const int low_dim, const Rcpp::Nullable<Eigen::MatrixXd> H_init, const int max_iter, const double tol, const int ncores);
+RcppExport SEXP _nnmf_nmf_reg_cpp(SEXP XSEXP, SEXP ZSEXP, SEXP low_dimSEXP, SEXP H_initSEXP, SEXP max_iterSEXP, SEXP tolSEXP, SEXP ncoresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< const int >::type low_dim(low_dimSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::Nullable<Eigen::MatrixXd> >::type H_init(H_initSEXP);
+    Rcpp::traits::input_parameter< const int >::type max_iter(max_iterSEXP);
+    Rcpp::traits::input_parameter< const double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< const int >::type ncores(ncoresSEXP);
+    rcpp_result_gen = Rcpp::wrap(nmf_reg_cpp(X, Z, low_dim, H_init, max_iter, tol, ncores));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_nnmf_nmf_als", (DL_FUNC) &_nnmf_nmf_als, 8},
+    {"_nnmf_nmf_pred_cpp", (DL_FUNC) &_nnmf_nmf_pred_cpp, 4},
+    {"_nnmf_nmf_als_cpp", (DL_FUNC) &_nnmf_nmf_als_cpp, 8},
+    {"_nnmf_nmf_reg_cpp", (DL_FUNC) &_nnmf_nmf_reg_cpp, 7},
     {NULL, NULL, 0}
 };
 
